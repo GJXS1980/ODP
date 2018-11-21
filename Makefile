@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gdut-drcom
-PKG_VERSION:=2.0.0
+PKG_VERSION:=1.6.8
 PKG_RELEASE:=4
 
 PKG_SOURCE:=$(PKG_VERSION).tar.gz
