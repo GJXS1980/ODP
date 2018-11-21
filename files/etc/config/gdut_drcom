@@ -1,0 +1,11 @@
+
+config gdut_drcom
+	option remote_ip '10.0.3.2'
+	option keep_alive1_flag 'dc'
+	option enable '1'
+	option enable_crypt '1'
+	option username ''
+	option password ''
+	option ifname ''
+	option macaddr ''
+
