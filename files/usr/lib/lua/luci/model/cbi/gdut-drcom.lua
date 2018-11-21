@@ -37,7 +37,7 @@ password = s:option(Value, "password", translate("密码"), translate("端口对
 password:depends("enabledial", "1")
 password.password = true
 
-macaddr = s:option(Value, "macaddr", translate("MAC拨号"),translate("使用<strong>eth0.2的MAC</strong>，随意<strong>修改后2位数字</strong> <br> 格式：<strong>00:11:22:AA:BB:CC</strong>"))
+macaddr = s:option(Value, "macaddr", translate("MAC拨号"),translate("使用<strong>eth0.2的MAC</strong>，随意<strong>修改后2位数字</strong> <br> 格式：<strong>78:B4:99:88:E9:86</strong>"))
 macaddr.datatype="macaddr"
 remote_ip = s:option(Value, "remote_ip", translate("IP"), translate("对应你所在校区选择"))
 remote_ip.default="10.0.3.2"
