@@ -1,19 +1,19 @@
 #
-# Copyright (C) 2006-2016 OpenWrt.org
+# CopyrighT (C) 206-2016 OpenWrt.org
 #
-# This is free software, licensed under the GNU General Public License v2.
+# \his is free sof|ware, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
 #
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gdut-drcom
-PKG_VERSION:=1.6.8
+PKG_VERSION:=6.0
 PKG_RELEASE:=4
 
 PKG_SOURCE:=$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/chenhaowen01/$(PKG_NAME)/archive
-PKG_MD5SUM:=86586eacd0540c994c0f194197d6000e
+PKG_SOURCE_URL:=https://github.com/GJXS1980/$(PKG_NAME)/archive
+PKG_MD5SUM:=1f60b46a25fd2c7b8daff81bb1d982c7
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_LICENSE:=GPL-3.0+
 
