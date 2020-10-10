@@ -13,7 +13,7 @@ start() {
 	password=$(uci get gdut_drcom.@gdut_drcom[0].password 2>/dev/null)
 	macaddr=$(uci get gdut_drcom.@gdut_drcom[0].macaddr 2>/dev/null)
 	enable_crypt=$(uci get gdut_drcom.@gdut_drcom[0].enable_crypt 2>/dev/null)
-	
+	enable_watchdog=$(uci get gdut_drcom.@gdut_drcom[0].enable_watchdog 2>/dev/null)
 
 	if [ "$enable"x = "1"x ]; then
 		/etc/init.d/gdut-drcom enable
@@ -23,14 +23,14 @@ start() {
 	fi
 
 	if [ "$enable_dial"x != "0"x ]; then
-#		echo "$ifname" "$username" "$password"
+		#		echo "$ifname" "$username" "$password"
 		/usr/bin/gdut-drcom-patch
 		uci set network.wan.ifname="$ifname"
 		uci set network.wan.proto="pppoe"
 		uci set network.wan.username="$username"
 		uci set network.wan.password="$password"
-#		uci set network.wan._orig_ifname='eth0.2'
-#		uci set network.wan._orig_bridge='false'
+		#		uci set network.wan._orig_ifname='eth0.2'
+		#		uci set network.wan._orig_bridge='false'
 		uci commit
 	fi
 
@@ -51,14 +51,20 @@ start() {
 		cmd=$cmd"--keep-alive1-flag=$keep_alive1_flag "
 	fi
 	if [ "$enable_crypt"x = "1"x ]; then
-        cmd=$cmd"--enable-crypt "
-    fi
+		cmd=$cmd"--enable-crypt "
+	fi
+
+	if [ "$enable_watchdog"x = "1"x ]; then
+		echo "*/1 * * * * /usr/bin/gdut-drcom-reconnect" >> /etc/crontabs/root
+	else
+		sed -i '/gdut-drcom-reconnect/d' /etc/crontabs/root
+	fi
+
 	cmd=$cmd"--log-file=/tmp/gdut-drcom.log 2>/tmp/gdut-drcom_error.log &"
 
 	eval $cmd
 }
-stop()
-{
+stop() {
 	service_stop /usr/bin/gdut-drcom
 	return 0
 }

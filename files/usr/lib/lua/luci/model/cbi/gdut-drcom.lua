@@ -62,6 +62,8 @@ enable_crypt.default="1"
 enable_crypt:value("1", translate("5.2.1(P版)或6.0.0(P版)"))
 enable_crypt:value("0", translate("5.2.0（P版）"))
 
+enable_watchdog = s:option(Flag, "enable_watchdog", translate("网络监控"),translate("开启时每分钟检测一次，若断网则修改mac地址并重启本程序"))
+
 local apply = luci.http.formvalue("cbi.apply")
 if apply then
 	io.popen("/etc/init.d/gdut-drcom restart")

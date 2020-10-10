@@ -1,0 +1,14 @@
+#!/bin/sh
+tmp_log="/tmp/gdut-drcom-reconnect"
+remote_ip=$(uci get gdut_drcom.@gdut_drcom[0].remote_ip 2>/dev/null)
+date >> $tmp_log
+ping -c3 $remote_ip
+if [ $? -eq 0 ]; then
+  echo 'network fine.' >> $tmp_log
+else 
+  echo 'network down.' >> $tmp_log
+  new_macaddr=$(hexdump -n5 -e'/5 "1C" 5/1 ":%02X"' /dev/random)
+  uci set gdut_drcom.@gdut_drcom[0].macaddr=$new_macaddr && uci commit
+  echo 'reset macaddr:'$new_macaddr >> $tmp_log
+  /etc/init.d/gdut-drcom restart
+fi
