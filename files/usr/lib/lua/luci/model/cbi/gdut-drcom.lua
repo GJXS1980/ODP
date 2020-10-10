@@ -39,6 +39,15 @@ password.password = true
 
 macaddr = s:option(Value, "macaddr", translate("MAC拨号"),translate("使用<strong>eth0.2的MAC</strong>，随意<strong>修改后2位数字</strong> <br> 格式：<strong>78:B4:99:88:E9:86</strong>"))
 macaddr.datatype="macaddr"
+
+local new_macaddr =luci.sys.exec( "hexdump -n5 -e'/5 \"1C\" 5/1 \":%02X\"' /dev/random")
+button_update_macaddr = s:option(Button, "_button_update_macaddr", translate("随机MAC地址"))
+button_update_macaddr.inputtitle = translate ( "点击更新Mac地址为：" .. new_macaddr)
+button_update_macaddr.inputstyle = "apply"
+function button_update_macaddr.write (self, section, value)
+        luci.sys.exec("uci set gdut_drcom.@gdut_drcom[0].macaddr=".. new_macaddr .." && uci commit")
+end
+
 remote_ip = s:option(Value, "remote_ip", translate("IP"), translate("对应你所在校区选择"))
 remote_ip.default="10.0.3.2"
 remote_ip.datatype="ipaddr"
