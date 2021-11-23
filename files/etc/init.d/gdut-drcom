@@ -7,7 +7,7 @@ start() {
 	keep_alive1_flag=$(uci get gdut_drcom.@gdut_drcom[0].keep_alive1_flag 2>/dev/null)
 	enable=$(uci get gdut_drcom.@gdut_drcom[0].enable 2>/dev/null)
 
-	enable_dial=$(uci get gdut_drcom.@gdut_drcom[0].enable_dial 2>/dev/null)
+	enable_dial=$(uci get gdut_drcom.@gdut_drcom[0].enabledial 2>/dev/null)
 	ifname=$(uci get gdut_drcom.@gdut_drcom[0].ifname 2>/dev/null)
 	username=$(uci get gdut_drcom.@gdut_drcom[0].username 2>/dev/null)
 	password=$(uci get gdut_drcom.@gdut_drcom[0].password 2>/dev/null)
